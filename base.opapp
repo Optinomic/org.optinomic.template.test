@@ -32,15 +32,6 @@ __opapp_include(javascript/main.js)
 
 
 
-[calculation javascript my_calculation]
-__opapp_include(calculations/full.js)
-
-
-
-
-
-
-
 [readme]
 # Optinomic-App
 
