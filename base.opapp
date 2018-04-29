@@ -27,10 +27,6 @@ __opapp_include(template/hello_world.html)
 __opapp_include(css/default.css)
 
 
-[javascript]
-__opapp_include(javascript/main.js)
-
-
 
 [readme]
 # Optinomic-App
