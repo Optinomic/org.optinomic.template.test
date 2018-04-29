@@ -23,16 +23,12 @@ website = https://www.optinomic.com/
 [template Hello_World 6 6]
 __opapp_include(template/hello_world.html)
 
-[template Another_Template 6 6]
-__opapp_include(template/template_1.html)
-
 [css]
 __opapp_include(css/default.css)
 
 
 [javascript]
 __opapp_include(javascript/main.js)
-
 
 
 
