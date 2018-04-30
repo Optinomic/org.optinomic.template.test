@@ -19,6 +19,9 @@ company = Optinomic Gmbh
 phone = +41 (0)44 508 26 76
 website = https://www.optinomic.com/
 
+[readme]
+# HOTLOAD
+
 [template Hello_World 6 6]
 <head><meta name="author" content="Optinomic GmbH"></head><h1>Welcome</h1><p>Optinomic-Apps</p>
 
