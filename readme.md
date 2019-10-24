@@ -1,24 +1,21 @@
-# Optinomic-App
+## act-info :: Eintrittsbefragung
 
-## Beschreibung
+Work in Progress!  Do not use in PRODUCTION!   
 
-Beschreiben Sie die Funktionalität Ihrer Applikation hier. Mit Apps werden Computerprogramme bezeichnet, die genutzt werden, um eine nützliche oder gewünschte nicht systemtechnische Funktionalität zu bearbeiten oder zu unterstützen, das heisst sie dienen der „Lösung von Benutzerproblemen“.
+### Zusammenfassung
+act-info (addiction, care and therapy information) ist ein einheitliches, gesamtschweizerisches Klientenmonitoringsystem für den Bereich der Suchthilfe.
 
-## Auswertung / Ergebnisse
+Erfassung der vier Bereiche Behandlungsgrundlagen, soziodemografische Angaben, Substanzkonsum und Gesundheit (ausserhalb Substanzproblematik)
 
-- Unterkapitel: Beschreiben Sie die Auswertungen / Ergebnisse Ihrer Applikation hier.
+### Hintergrund
+Das nationale Dokumentationssystem umfasst Angebote der ambulanten und stationären Behandlung von Problemen mit legalen und illegalen Substanzen sowie von nicht-substanzgebundener Abhängigkeit. act-info ist das Resultat der Harmonisierung der bestehenden Suchthilfestatistiken.
 
-## Hinweis
+Die beteiligten Forschungsinstitute (Sucht Schweiz Lausanne, ISGF Zürich) sind für die Datenerhebung und die Auswertungen in den einzelnen Behandlungssektoren verantwortlich.
 
-Diese Applikation ist nur lauffähig innerhalb einer [https://www.optinomic.com/](Optinomic) Installation.
+act-info wird durch das Bundesamt für Gesundheit BAG finanziert und koordiniert. Die Verantwortung für das Gesamtprojekt act-info liegt beim BAG.
 
-## Kontakt
-
-![image](http://www.optinomic.com/_logo/optinomic_logo_trademark_indigo_25.png)
-
-*Optinomic GmbH*   
-*Haldenstrasse 7*     
-*CH - 8942 Oberrieden*     
-*+41(0)44 508 26 76*    
-*[info@optinomic.com](mailto:info@optinomic.com)*   
-*[www.optinomic.com](https://www.optinomic.com/)*   
+#### Auswertung / Ergebnisse
+- Substanzkonsum vor Eintritt (Substanz + Häufigkeit)
+- Zusatzangaben vor Eintritt (Hauptproblemsubstanz)
+- AUDIT-Summenwert (Verdacht auf Alkoholabhängigkeit)
+- Fagerström-Summenwert (Ausprägung der Nikotinabhängigkeit)
