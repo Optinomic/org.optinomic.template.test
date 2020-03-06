@@ -49,9 +49,7 @@
         <template is="dom-if" if="[[_d.init_done]]">
             <div id="main_content">
                 <div id="content_bdi" class="content_block">
-                    <element-actinfo app-id-eintritt="[[_d.app_id_ein]]" app-id-austritt="[[_d.app_id_aus]]"></element-actinfo>
-
-                    <element-aase app-id="[[_d.app_id]]"></element-aase>
+                    <element-tmt app-id="[[_d.app_id]]"></element-tmt>
                 </div>
             </div>
         </template>
@@ -76,8 +74,7 @@
 
             var d = {};
 
-            d.app_id_ein = "org.optinomic.template.test";
-            d.app_id_aus = "ch.suedhang.apps.actinfo_aus";
+            d.app_id = "ch.suedhang.apps.tmt_V3";
 
             d.init_done = true;
             this.set('_d', d);

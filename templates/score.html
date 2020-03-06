@@ -1,94 +1,141 @@
-__opapp_include(../lib/html/optinomic/page/start.m4)
-<div ng-repeat="response in d.current_response">
-    <div>
-        <div class="grid-border-bottom" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
-            <h4 class="md-headline">Problemsubstanzen</h4>
-            <div>
-                <p class="small">{{response.entity.data.response.VMEB001 | date}}
-                    <br><small>{{d.dataMain.apps.current.name}}</small></p>
-            </div>
+<div class="grid-border-top" style="margin-top: 30px;" ng-if="!d.TMT.show_legend">
+    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+        <div flex>
+            <h3 class="md-headline">Stichproben | Legende</h3>
         </div>
-        <p class="md-body-1" style="margin-top: 12px;">Folgende Substanzen konsumierte der Patient/ die Patientin vor dem aktuellen Entzug in der angegebenen Häufigkeit:</p>
-        <p class="md-body-2" ng-repeat="problemsubstanz in response.problemsubstanzen">- {{problemsubstanz}}</p>
+        <md-button ng-click="d.TMT.settings=! d.TMT.settings" class="md-icon-button">
+            <i class="mdi mdi-dots-vertical" style="font-size:24px;"></i>
+            <md-tooltip md-direction="left">
+                Einstellungen
+            </md-tooltip>
+        </md-button>
     </div>
-    <div style="margin-top: 48px;">
-        <div class="grid-border-bottom" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
-            <h4 class="md-headline">Alkohol: AUDIT</h4>
-            <div>
-                <p class="small">{{response.entity.data.response.VMEB001 | date}}
-                    <br><small>{{d.dataMain.apps.current.name}}</small></p>
-            </div>
+    <div class="no-page-break" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start">
+        <div flex="25">
+            <p class="md-subhead">Normstichprobe</p>
+            <p class="md-caption" style="color:#757575;margin-top:-6px;">
+                Z-Werte aufgrund der Normstichprobe nach Tombaugh (2004):
+                <br> {{d.ks.normgurppe.text}}
+            </p>
         </div>
-        <p class="md-body-1" style="margin-top: 12px;">Summenwert von <strong>{{response.calculations[0].calculation_result.AUDIT.AUDIT_Score}}</strong> Punkten (Mittelwert: {{response.calculations[0].calculation_result.AUDIT.AUDIT_Score_Mean}} bei {{response.calculations[0].calculation_result.AUDIT.valid_scores}} von 10 beantworteten Fragen) auf der AUDIT-Skala.</p>
-        <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="start center">
-            <div flex="55" ng-if="response.calculations[0].calculation_result.AUDIT.AUDIT_Score !== null">
-                <score-threshold score="response.calculations[0].calculation_result.AUDIT.AUDIT_Score" min="0" max="40" show-percent-scale="true" scale-ranges="response.calculations[0].calculation_result.AUDIT.ranges" show-min-max="true"></score-threshold>
-                <div layout="column" layout-align="center center" style="margin-top: -6px;" layout-margin>
-                    <h4 class="md-subhead" style="text-align: center !important;" ng-attr-style="color:{{response.calculations[0].calculation_result.AUDIT.interpretation.result_color}}">{{response.calculations[0].calculation_result.AUDIT.interpretation.result}}</h4>
+        <div flex>
+            <p class="md-subhead">Klinikstichprobe</p>
+            <div style="margin-top:-12px;">
+                <div ng-repeat="data in d.TMT.groups[0].data" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+                    <div>
+                        <p ng-attr-style="font-size:28px;margin-top:-4px; color:{{data.zscore.clinicsample_color}}!important;"><span style="color:#424242;font-size:9px;">{{$index + 1}}</span>■</p>
+                    </div>
+                    <p flex class="md-caption small" style="color:#757575;">{{data.ks.path_data.text_full}}</p>
                 </div>
             </div>
-            <div flex="55" ng-if="response.calculations[0].calculation_result.AUDIT.AUDIT_Score === null">
-                <h5 class="md-subhead">Keine Interpretation möglich</h5>
-                <p class="md-caption">Kein AUDIT-Score vorhanden.</p>
-            </div>
-            <div flex="45">
-                <h5 class="md-subhead">
-                    AUDIT Summenwerte |
-                    <span ng-if="response.calculations[0].calculation_result.AUDIT.gender === 'male'">Männer</span>
-                    <span ng-if="response.calculations[0].calculation_result.AUDIT.gender !== 'male'">Frauen</span>
-                </h5>
-                <table class="table table-condensed" style="width: 80%;">
-                    <tr ng-repeat="range in response.calculations[0].calculation_result.AUDIT.ranges.ranges">
-                        <td style="text-align:right !important;">
-                            <small>{{range.from}}-{{range.to}}&nbsp;</small>
-                        </td>
-                        <td>
-                            <small>{{range.result}}</small>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div style="margin-top: 48px;">
-        <div class="grid-border-bottom" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
-            <h4 class="md-headline">Nikotin: Fagerström</h4>
-            <div>
-                <p class="small">{{response.entity.data.response.VMEB001 | date}}
-                    <br><small>{{d.dataMain.apps.current.name}}</small></p>
-            </div>
-        </div>
-        <p class="md-body-1" style="margin-top: 12px;" ng-if="(response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score !== null) && (response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score !== 999)">Summenwert von <strong>{{response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score}}</strong> Punkten (Mittelwert: {{response.calculations[0].calculation_result.FAGERSTROEM.Fagerstroem_Mean}} bei {{response.calculations[0].calculation_result.FAGERSTROEM.answers}} von 6 beantworteten Fragen) auf der Fagerström-Skala.</p>
-        <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="start center" ng-if="(response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score !== null) && (response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score !== 999)">
-            <div flex="55">
-                <score-threshold score="response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score" min="0" max="10" show-percent-scale="true" scale-ranges="response.calculations[0].calculation_result.FAGERSTROEM.ranges" show-min-max="true"></score-threshold>
-                <div layout="column" layout-align="center center" style="margin-top: -6px;" layout-margin>
-                    <h4 class="md-subhead" style="text-align: center !important;" ng-attr-style="color:{{response.calculations[0].calculation_result.FAGERSTROEM.interpretation.result_color}}">{{response.calculations[0].calculation_result.FAGERSTROEM.interpretation.result}}</h4>
-                </div>
-            </div>
-            <div flex="45">
-                <h5 class="md-subhead">
-                    Fagerström Summenwerte
-                </h5>
-                <table class="table table-condensed" style="width: 80%;">
-                    <tr ng-repeat="range in response.calculations[0].calculation_result.FAGERSTROEM.ranges.ranges">
-                        <td style="text-align:right !important;">
-                            <small>{{range.from}}-{{range.to}}&nbsp;</small>
-                        </td>
-                        <td>
-                            <small>{{range.result}}</small>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <div flex="55" ng-if="(response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score === null) || (response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score === 999)">
-            <h5 class="md-subhead">Keine Interpretation möglich</h5>
-            <p class="md-title" ng-if="response.calculations[0].calculation_result.response.data.response.VZET010 === '1'">Nichtraucher/in</p>
-            <p class="md-title" ng-if="response.calculations[0].calculation_result.response.data.response.VZET010 === '999'">Das Rauchverhalten ist nicht bekannt.</p>
-            <p class="md-title" ng-if="response.calculations[0].calculation_result.response.data.response.VZET020 === '777'">PatientIn raucht ein anderes Tabakprodukt als Zigaretten.</p>
-            <p class="md-title" ng-if="response.calculations[0].calculation_result.response.data.response.VZET020 === '999'">Das Rauchverhalten ist nicht bekannt.</p>
         </div>
     </div>
 </div>
-__opapp_include(../lib/html/optinomic/page/end.m4)
+<div class="grid-border-top" style="margin-top: 30px;" ng-repeat="tmt in d.TMT.groups">
+    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+        <div flex>
+            <h3 class="md-headline">{{tmt.name}}</h3>
+        </div>
+        <md-button ng-if="d.TMT.show_legend" ng-click="d.TMT.show_legend = !d.TMT.show_legend" class="md-icon-button">
+            <i class="mdi mdi-eye-off" style="font-size:18px; color:#9E9E9E"></i>
+            <md-tooltip md-direction="left">
+                Legende ausblenden
+            </md-tooltip>
+        </md-button>
+        <md-button ng-if="!d.TMT.show_legend" ng-click="d.TMT.show_legend = !d.TMT.show_legend" class="md-icon-button">
+            <i class="mdi mdi-eye" style="font-size:18px; color:#9E9E9E"></i>
+            <md-tooltip md-direction="left">
+                Legende anzeigen
+            </md-tooltip>
+        </md-button>
+        <md-button ng-click="d.TMT.settings=! d.TMT.settings" class="md-icon-button">
+            <i class="mdi mdi-dots-vertical" style="font-size:24px;"></i>
+            <md-tooltip md-direction="left">
+                Einstellungen
+            </md-tooltip>
+        </md-button>
+    </div>
+    <div class="no-page-break" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start" ng-if="d.TMT.show_legend">
+        <div flex="25">
+            <p class="md-subhead">Normstichprobe</p>
+            <p class="md-caption" style="color:#757575;margin-top:-6px;">
+                Z-Werte aufgrund der Normstichprobe nach Tombaugh (2004):
+                <br> {{d.ks.normgurppe.text}}
+            </p>
+        </div>
+        <div flex>
+            <p class="md-subhead">Klinikstichprobe</p>
+            <div style="margin-top:-12px;">
+                <div ng-repeat="data in tmt.data" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+                    <div>
+                        <p ng-attr-style="font-size:28px;margin-top:-4px; color:{{data.zscore.clinicsample_color}}!important;"><span style="color:#424242;font-size:9px;">{{$index + 1}}</span>■</p>
+                    </div>
+                    <p flex class="md-caption small" style="color:#757575;">{{data.ks.path_data.text_full}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="no-page-break" ng-repeat="data in tmt.data" style="margin-top: -6px;">
+        <div class="no-page-break" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
+            <div flex="80">
+                <z-score data="data.zscore" options="d.TMT.zscore_options"></z-score>
+            </div>
+            <div flex="10">
+                <div ng-if="tmt.name === 'TMT A'" style="padding-left: 12px;">
+                    <p class="md-caption">
+                        Zeit: {{data.calculation.TMTATime}}
+                        <br>Fehler: {{data.calculation.TMTAError}}
+                    </p>
+                </div>
+                <div ng-if="tmt.name === 'TMT B'" style="padding-left: 12px;">
+                    <p class="md-caption">
+                        Zeit: {{data.calculation.TMTBTime}}
+                        <br>Fehler: {{data.calculation.TMTBError}}
+                        <span ng-if="data.calculation.Messzeitpunkt.Messzeitpunkt === 1">
+                    <br>B/A: {{data.calculation.quotient_rounded}}
+                    </span>
+                    </p>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <div>
+                        <md-button ng-if="!data.ks.show_controls" ng-click="data.ks.show_controls = !data.ks.show_controls" class="md-icon-button">
+                            <i class="mdi mdi-lightbulb-outline" style="font-size:18px;color:#616161"></i>
+                            <md-tooltip md-direction="left">
+                                Detailanalyse | Öffnen
+                            </md-tooltip>
+                        </md-button>
+                        <md-button ng-if="data.ks.show_controls" ng-click="data.ks.show_controls = !data.ks.show_controls" class="md-icon-button">
+                            <i class="mdi mdi-close" style="font-size:18px;"></i>
+                            <md-tooltip md-direction="left">
+                                Detailanalyse | Schliessen
+                            </md-tooltip>
+                        </md-button>
+                    </div>
+                    <p style="color:#424242;font-size:9px;margin-left: 10px; margin-top:-28px;">
+                        <span ng-attr-style="font-size:22px; color:{{data.zscore.clinicsample_color}}!important;">■</span> {{$index + 1}}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div ng-if="data.ks.show_controls">
+            <div style="margin-top: 12px;">
+                <p class="md-caption"><span ng-attr-style="font-size:28px;margin-top:4px; color:{{data.zscore.clinicsample_color}}!important;">■</span>{{data.ks.path_data.text_full}}</p>
+            </div>
+            <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
+                <md-input-container flex ng-class="md-block" ng-repeat="dim in d.ks.dimensions">
+                    <label>{{dim.name}}</label>
+                    <md-select ng-model="data.ks.path_selected[$index]" ng-change="changeClinicSample(data)">
+                        <md-option ng-repeat="item in dim.array" ng-value="item.id">
+                            {{item.text}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <div class="grid-border-top">
+                <p class="md-caption">&nbsp;</p>
+            </div>
+        </div>
+    </div>
+</div>
