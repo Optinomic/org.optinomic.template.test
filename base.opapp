@@ -1,45 +1,30 @@
 [module]
 id = __opapp_identifier()
-name = Resilienzfragebogen (RS-13)
-short_description = Psychische Widerstandskraft
+name = Entwicklung (BO)
+short_description = Spielwiese zur App-Entwicklung.
 version = __opapp_version()
 type = patient
 
 [description]
-Mit dem Resilienzfragebogen (RS-13) wird die die psychische Widerstandskraft; die Fähigkeit, schwierige Lebenssituationen ohne anhaltende Beeinträchtigung zu überstehen erfasst.
+Spielwiese zur App-Entwicklung.
 
 [developer]
-first_name = Nora
-last_name = Schönenberger
-github_user = schoenenb
-email = nora.schoenenberger@suedhang.ch
-company = Suedhang
-phone = +41 (0)31 828 14 92
-website = http://suedhang.ch/de/Forschung
+first_name = Beat
+last_name = Ottiger
+github_user = ottigerb
+email = beat@optinomic.com
+company = Optinomic Gmbh
+phone = +41 (0)44 508 26 76
+website = http://www.optinomic.com/
 
 
-[template Resilienz 6 12]
-<h1>Resilienzfragebogen (RS-13)</h1>
-<p>Under construction</p>
+[template START 6 6]
+<h1>Entwicklung (BO)</h1>
+<p>Spielwiese zur App-Entwicklung.</p>
 
 
 [readme]
 __opapp_include(readme.md)
 
+
 [dependencies]
-
-
-[survey]
-id = rs13_ng
-type = ng
-responsibility = lead_therapist
-name = Resilienzfragebogen (RS-13)
-host = default
-
-[survey_markup rs13_ng]
-__opapp_include(survey_markups/rs13.html)
-
-
-
-[calculation rs13_score javascript]
-__opapp_include(calculations/rs13_score.js)
